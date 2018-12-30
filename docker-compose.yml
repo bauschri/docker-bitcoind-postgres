@@ -1,0 +1,47 @@
+version: '2'
+services:
+
+  db-internal-admin:
+    image: zhajor/docker-phppgadmin:latest
+    ports:
+      - "8384:80"
+    environment:
+      - DB_HOST=database-internal
+      - DB_PORT=5432
+    networks:
+      - bitcoind
+
+  database-internal:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    networks:
+      - bitcoind
+
+  bitcoin-abe:
+    image: bitcoin-abe:latest
+    build:
+      context: ./docker-bitcoin-abe
+      dockerfile: $PWD/docker-bitcoin-abe/Dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - ./data-bitcoind/.bitcoin:/bitcoin-abe
+    networks:
+      - bitcoind
+
+  bitcoind:
+    image: bitcoind:latest
+    build:
+      context: ./docker-bitcoind
+      dockerfile: $PWD/docker-bitcoind/Dockerfile
+    volumes:
+      - ./data-bitcoind:/bitcoin
+    networks:
+      - bitcoind
+
+networks:
+  bitcoind:
