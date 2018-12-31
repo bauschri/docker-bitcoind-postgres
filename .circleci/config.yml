@@ -1,6 +1,15 @@
 version: 2
+workflows:
+  version: 2
+  build_test_deploy:
+    jobs:
+      - base-install
+      - build-docker-images:
+          requires:
+            - base-install
+
 jobs:
-  build:
+  base-install:
     docker:
       - image: circleci/node:8
     working_directory: ~/code
@@ -10,7 +19,7 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
 
-  install:
+  build-docker-images:
     docker:
       - image: circleci/node:8
     working_directory: ~/code
