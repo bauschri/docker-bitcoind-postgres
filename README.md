@@ -3,8 +3,6 @@
 ```
 # install
 bash install.sh
-
-
 ```
 
 
