@@ -42,7 +42,8 @@ jobs:
     working_directory: ~/code
     steps:
       - checkout
-      - build-docker-images
       - run:
           name: Install dependencies
           command: bash install.sh
+          requires:
+            - build-docker-images
