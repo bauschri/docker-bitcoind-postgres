@@ -12,3 +12,5 @@ cp ./postgres.conf ./docker-bitcoin-abe
 cp ./run.server.sh ./docker-bitcoin-abe
 cp ./Dockerfile-bitcoin-abe ./docker-bitcoin-abe/Dockerfile
 cp ./Dockerfile-bitcoind ./docker-bitcoind/Dockerfile
+
+docker-compose build 
