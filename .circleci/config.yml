@@ -1,0 +1,60 @@
+version: 2
+workflows:
+  version: 2
+  build_test_deploy:
+    jobs:
+      - base-install:
+          filters:
+            branches:
+              only:
+                - master
+      - build-docker-images:
+          requires:
+            - base-install
+          filters:
+            branches:
+              only:
+                - master
+      - download-and-build:
+          requires:
+            - base-install
+            - build-docker-images
+          filters:
+            branches:
+              only:
+                - master
+jobs:
+  base-install:
+    docker:
+      - image: circleci/node:8
+    working_directory: ~/code
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+
+  build-docker-images:
+    docker:
+      - image: circleci/node:8
+    working_directory: ~/code
+    steps:
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Install Docker Compose
+          command: |
+            curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
+            chmod +x ~/docker-compose
+            sudo mv ~/docker-compose /usr/local/bin/docker-compose
+
+  download-and-build:
+    docker:
+      - image: circleci/node:8
+    working_directory: ~/code
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Install dependencies
+          command: bash install.sh
