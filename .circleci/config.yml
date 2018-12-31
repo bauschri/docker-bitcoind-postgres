@@ -7,11 +7,18 @@ workflows:
       - build-docker-images:
           requires:
             - base-install
+          filters:
+            branches:
+              only:
+                - master
       - download-and-build:
           requires:
             - base-install
             - build-docker-images
-
+          filters:
+            branches:
+              only:
+                - master
 jobs:
   base-install:
     docker:
