@@ -7,5 +7,15 @@ jobs:
     steps:
       - checkout
 
-      - setup_remote_docker:   # (2)
-          docker_layer_caching: true # (3)
+      - setup_remote_docker:
+          docker_layer_caching: true
+
+  install:
+    docker:
+      - image: circleci/node:8
+    working_directory: ~/code
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: bash install.sh
