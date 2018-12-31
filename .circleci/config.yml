@@ -42,8 +42,8 @@ jobs:
     working_directory: ~/code
     steps:
       - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
       - run:
           name: Install dependencies
           command: bash install.sh
-          requires:
-            - build-docker-images
