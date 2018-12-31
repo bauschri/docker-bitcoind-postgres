@@ -1,9 +1,9 @@
 #!/bin/bash
 
 echo "clone repos"
-git clone --quiet git@github.com:bitcoin-abe/bitcoin-abe.git
-git clone --quiet git@github.com:c0achmcguirk/docker-bitcoin-abe.git
-git clone --quiet git@github.com:kylemanna/docker-bitcoind.git
+git clone --quiet https://github.com:bitcoin-abe/bitcoin-abe.git
+git clone --quiet https://github.com:c0achmcguirk/docker-bitcoin-abe.git
+git clone --quiet https://github.com:kylemanna/docker-bitcoind.git
 
 echo "create data-directories"
 mkdir ./data-bitcoind
