@@ -9,6 +9,7 @@ workflows:
             - base-install
       - download-and-build:
           requires:
+            - base-install
             - build-docker-images
 
 jobs:
