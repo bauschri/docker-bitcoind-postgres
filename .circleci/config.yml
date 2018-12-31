@@ -38,6 +38,7 @@ jobs:
       - image: circleci/node:8
     working_directory: ~/code
     steps:
+      - checkout
       - run:
           name: Install dependencies
           command: bash install.sh
