@@ -4,10 +4,6 @@ workflows:
   build_test_deploy:
     jobs:
       - base-install:
-          filters:
-            branches:
-              only:
-                - master
       - build-docker-images:
           requires:
             - base-install
