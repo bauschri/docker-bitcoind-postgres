@@ -49,5 +49,7 @@ services:
     networks:
       - bitcoind
 
+
 networks:
   bitcoind:
+    external: true
