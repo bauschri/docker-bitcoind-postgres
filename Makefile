@@ -1,4 +1,4 @@
-.PHONY: build deploy
+.PHONY: cleanup download build deploy
 
 PACKAGE_VERSION=$(shell grep version package.json | cut -d ':' -f2 | sed 's/[", ]//g')
 
