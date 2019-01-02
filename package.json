@@ -1,0 +1,5 @@
+{
+  "name": "docker-bitcoind-postgres",
+  "version": "0.1",
+  "private": true,
+}
